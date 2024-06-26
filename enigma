@@ -1,0 +1,36 @@
+def decodificar_mensagem(mensagem_codificada):
+    substituicoes = {
+        '6': 'F',
+        '5': 'E',
+        '50': 'L',
+        '1': 'I',
+        '26': 'Z',
+        'MM': '2000',
+        'R': '18'
+    }
+
+    mensagem_decodificada = ""
+    i = 0
+
+    while i < len(mensagem_codificada):
+        if i + 1 < len(mensagem_codificada) and mensagem_codificada[i:i+2] in substituicoes: 
+            
+            mensagem_decodificada += substituicoes[mensagem_codificada[i:i+2]]
+            i += 2
+        elif mensagem_codificada[i] in substituicoes:
+            
+            mensagem_decodificada += substituicoes[mensagem_codificada[i]]
+            i += 1
+        else:
+            mensagem_decodificada += mensagem_codificada[i]
+            i += 1
+
+    
+    mensagem_decodificada = mensagem_decodificada.replace('200018', '2018')
+
+    return mensagem_decodificada
+
+mensagem_codificada = "6550126 MMR"
+mensagem_decodificada = decodificar_mensagem(mensagem_codificada)
+print(f"Mensagem Codificada: {mensagem_codificada}")
+print(f"Mensagem Decodificada: {mensagem_decodificada}")
